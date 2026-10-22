@@ -575,6 +575,88 @@ a.project:hover {
 .callout .carousel__track > * { flex: 0 0 100%; }
 .callout .carousel__track img { width: 100%; height: auto; border-radius: 10px; }
 
+/* Big-number stat blocks under the title */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 28px 0 36px;
+}
+/* On wide screens, reach a little past the text column so all four fit comfortably */
+@media (min-width: 960px) { .stats { margin-left: -50px; margin-right: -50px; } }
+/* Big number on the left, short label beside it */
+.stat {
+  flex: 0 1 auto;   /* only as wide as the number and label, no empty space */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 10px 12px;
+  background: #fff;
+  border: solid var(--accent, var(--purple));
+  border-width: 0 2px 2px 0;   /* bottom and right only */
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.stat__num {
+  flex: 0 0 auto;
+  font-weight: var(--heavy);
+  font-size: 36px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--accent, var(--purple));
+}
+.stat__num small { font-size: 18px; font-weight: var(--demi); }
+.stat__label { max-width: 11ch; font-size: 13px; line-height: 1.3; }
+
+/* Pull quote */
+.cs .quote {
+  margin: 30px 0;
+  padding: 4px 0 4px 20px;
+  border-left: 5px solid var(--pink);
+  font-weight: var(--demi);
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--accent, var(--purple));
+}
+.cs .quote + p { margin-top: -18px; font-size: 15px; padding-left: 25px; }
+
+/* Small idea tags */
+.cs ul.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.chips li {
+  padding: 5px 14px;
+  border: 2.25px solid var(--accent-soft, rgba(74, 45, 162, .75));
+  border-radius: 100px;
+  background: #fff;
+  box-shadow: 2px 2px 0 var(--pink);
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+/* What testing changed */
+.cs ul.changes { display: grid; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; }
+.changes li {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.changes b { color: var(--accent, var(--purple)); }
+.changes small { display: block; margin-top: 2px; font-size: 14px; opacity: .8; }
+
+/* Links at the end of a case study */
+.link-row { display: flex; flex-wrap: wrap; gap: 14px; margin: 36px 0 22px; }
+.cs .pill-btn { border-color: var(--accent, var(--purple)); color: var(--accent, var(--purple-soft)); }
+.link-row .phone-only { display: none; }   /* .pill-btn would otherwise show it on desktop */
+@media (max-width: 809px) { .link-row .phone-only { display: inline-flex; } }
+
 @media (max-width: 809px) {
   .cs { padding: 0 20px; }
   .cs__title { font-size: 22px; margin-top: 18px; }
@@ -590,6 +672,12 @@ a.project:hover {
   .callout { display: block; padding: 0; background: none; }
   .callout .carousel { margin-top: 18px; }
   .callout .carousel__track img { height: auto; width: 100%; }
+  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 22px 0 28px; }
+  .stat { padding: 10px 12px; gap: 8px; }
+  .stat__num { font-size: 30px; }
+  .stat__label { font-size: 12px; }
+  .cs .quote { font-size: 20px; }
+  .chips li { font-size: 14px; }
 }
 
 /* =========================================================
@@ -634,7 +722,7 @@ a.project:hover {
   width: 280px;
   padding: 22px 22px 18px;
   background: #fff;
-  border: solid var(--purple);
+  border: solid var(--accent, var(--purple));
   border-width: 0 5px 5px 1.5px;   /* no top, thin left, thick bottom/right */
   border-radius: 18px;
   box-shadow: 3px 3px 0 var(--pink);
@@ -644,7 +732,7 @@ a.project:hover {
   font-weight: var(--demi);
   font-size: 16px;
   line-height: 1.3;
-  color: var(--purple);
+  color: var(--accent, var(--purple));
 }
 .info-card p { font-size: 16px; line-height: 1.5; font-weight: var(--book); }
 

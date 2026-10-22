@@ -42,14 +42,23 @@
       <span><b>Methods:</b> User flows, trade-off sliders, Single Ease Question, user testing</span>
     </p>
 
+    <div class="stats">
+      <div class="stat"><span class="stat__num">3</span><span class="stat__label">dead ends before reaching the Terms</span></div>
+      <div class="stat"><span class="stat__num">2–3<small>/7</small></span><span class="stat__label">ease score for finding the Terms in the original app</span></div>
+      <div class="stat"><span class="stat__num">7 → 4</span><span class="stat__label">ideas sketched, then built</span></div>
+      <div class="stat"><span class="stat__num">2</span><span class="stat__label">platforms: mobile and desktop</span></div>
+    </div>
+
     <h2>Overview</h2>
     <p>I redesigned how Wealthsimple users find and understand their legal documents, on both mobile and desktop.</p>
     <p>Banking apps hold some of our most sensitive information, from our name and email to our social insurance number and tax records. Yet in Wealthsimple’s app, I couldn’t find the Terms of Use without a Google search.</p>
 
     <h2>The Problem</h2>
-    <p>Before choosing a project, I checked how easy it was to reach the Terms of Service in apps like Uber, WhatsApp, and YouTube. Then I chose an app with higher stakes: a bank.</p>
+    <p>I compared how easy it was to reach the Terms of Service in Uber, WhatsApp, and YouTube, then picked an app with higher stakes: a bank.</p>
     <p>Mapping the flow in Wealthsimple showed how hard it was. A user checks Profile, Settings, Personal Information, Login &amp; Security, and every other Settings tab, hitting three dead ends before Support finally sends them to Wealthsimple’s website.</p>
-    <p>Every tester asked whether the Terms of Use were in the app at all. They were, just very hard to find.</p>
+
+    <p class="quote">Every tester asked whether the Terms of Use were in the app at all.</p>
+    <p>They were, just very hard to find.</p>
 
     <h2>Some information Wealthsimple collects</h2>
     <div class="carousel">
@@ -66,15 +75,15 @@
     <h2>Exploring Ideas</h2>
     <p>Based on the research I’d done on user data, I finally came to a problem statement.</p>
     <p class="hmw">How might we give users more control over their data?</p>
-    <p>After ideating, I sketched some features based on this problem:</p>
-    <ul>
-      <li>A security history showing every time account data was accessed</li>
-      <li>A preferences tab to control what optional data Wealthsimple can use</li>
-      <li>A Legal tab in Settings</li>
-      <li>Subtext explaining why Wealthsimple needs each piece of personal data</li>
-      <li>A “What’s new” card showing recent changes to the documents</li>
-      <li>Highlighting text to get a simpler explanation</li>
-      <li>A summary of the most important clauses</li>
+    <p>I sketched seven features based on this problem:</p>
+    <ul class="chips">
+      <li>Security history</li>
+      <li>Data preferences tab</li>
+      <li>Legal tab in Settings</li>
+      <li>Why we need your data</li>
+      <li>“What’s new” card</li>
+      <li>Highlight to simplify</li>
+      <li>Key clause summary</li>
     </ul>
 
     <div class="carousel carousel--frame">
@@ -99,12 +108,11 @@
     <h2>Testing &amp; Iterating</h2>
     <div class="callout">
       <div>
-        <p>Using the Single Ease Question, testers rated how easy it was to find the Terms of Use in the original app. Scores ranged from 2 to 3 out of 7, where 1 is very hard.</p>
-        <p>Testing my mid-fidelity screens gave me three clear changes:</p>
-        <ul>
-          <li>Legal felt more natural inside Settings.</li>
-          <li>Settings took too many taps to reach, so it belonged in the bottom navigation bar.</li>
-          <li>Links to the Terms of Use should be highlighted in Wealthsimple’s accent colour.</li>
+        <p>On the Single Ease Question (1 = very hard, 7 = very easy), testers rated finding the Terms in the original app 2–3. Testing my mid-fidelity screens led to three changes:</p>
+        <ul class="changes">
+          <li><b>Legal → inside Settings</b><small>It felt more natural there.</small></li>
+          <li><b>Settings → bottom navigation bar</b><small>It took too many taps to reach.</small></li>
+          <li><b>Terms links → highlighted</b><small>In Wealthsimple’s accent colour.</small></li>
         </ul>
       </div>
       <div class="carousel carousel--plain">
@@ -128,7 +136,17 @@
       </div>
     </div>
 
-    <p class="small"><b>Link to Figma Prototype:</b> <a class="link" href="https://shorturl.at/yGg6B" target="_blank" rel="noopener">https://shorturl.at/yGg6B</a></p>
+    <div class="link-row">
+      <!-- Desktop gets the desktop prototype; phones keep the mobile one -->
+      <a class="pill-btn desktop-only" href="https://www.figma.com/proto/itZd8Bf0Ofvg5lM02hz67F/Wealthsimple-UI-revamp?node-id=56-1790&amp;viewport=505%2C158%2C0.09&amp;t=rSz6uDnbsnfBrQdS-1&amp;scaling=min-zoom&amp;content-scaling=fixed&amp;starting-point-node-id=56%3A1790&amp;show-proto-sidebar=1&amp;page-id=56%3A1780" target="_blank" rel="noopener">
+        Figma prototype
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.75 6.75h8.5v8.5M17 7 6.75 17.25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="pill-btn phone-only" href="https://shorturl.at/yGg6B" target="_blank" rel="noopener">
+        Figma prototype
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.75 6.75h8.5v8.5M17 7 6.75 17.25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
     <p class="small"><b>Credits:</b> UI assets from Christina’s Wealthsimple Design System on Figma Community. Fonts: Futura PT and Caslon Graphique.</p>
   </main>
 
