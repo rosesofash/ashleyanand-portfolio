@@ -312,29 +312,12 @@ a.project:hover {
 /* Tools ticker — moved by js/main.js so it can also be dragged */
 .tools { margin-top: 40px; text-align: center; }
 .tools h2 {
-  display: inline-block;   /* shares a line with the pause button */
-  vertical-align: middle;
   margin: 0;
   font-weight: var(--medium);
   font-size: 20px;
   line-height: 24px;
   color: var(--purple);
 }
-/* Pause/play for the ticker — added by js/main.js, same look as the hero's button */
-.ticker__toggle {
-  display: inline-grid;
-  place-items: center;
-  vertical-align: middle;
-  width: 30px;
-  height: 30px;
-  margin-left: 10px;
-  padding: 0;
-  border: 2px solid var(--navy);
-  border-radius: 100px;
-  background: var(--cream);
-  color: var(--navy);
-}
-.ticker__toggle svg { width: 16px; height: 16px; }
 .ticker {
   overflow: hidden;
   padding: 24px 0;
@@ -773,16 +756,6 @@ a.project:hover {
 }
 .cs-toc a[aria-current="true"]:hover { transform: none; }
 @media (min-width: 1300px) { .cs-toc { display: block; } }
-
-/* Less motion for people who ask for it: no smooth scrolling, no bouncing arrow,
-   and hover effects change colour/shadow without moving. The video and ticker
-   start paused (js/main.js) */
-@media (prefers-reduced-motion: reduce) {
-  html, .carousel__track { scroll-behavior: auto; }
-  .hero__chevron { animation: none; opacity: 1; }
-  a.project:hover, .cs .hmw:hover, .pill-btn:hover, .cs-toc a:hover { transform: none; }
-  .pill-nav.is-hidden { transform: translateX(-50%); }   /* fade only, no slide */
-}
 
 /* A11yson page uses green instead of purple */
 .theme-green { --accent: var(--green); --accent-shadow: var(--green-dark); --accent-soft: rgba(47, 118, 37, .75); --accent-line: rgba(47, 118, 37, .6); }

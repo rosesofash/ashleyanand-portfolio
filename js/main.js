@@ -1,18 +1,14 @@
 // Small bits of behaviour for the portfolio. No libraries needed.
 
-// Visitors who've asked their system for less motion get everything paused to start with;
-// they can still press play themselves
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const pauseIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="5" width="3" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="3" height="14" rx="1" fill="currentColor"/></svg>';
-const playIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
-
 // ---------- Hero video: plays on its own; pausing swaps in the still title ----------
 const hero = document.querySelector('.hero');
 const video = document.querySelector('.hero__video');
 const playBtn = document.querySelector('.hero__play');
 
 if (hero && video && playBtn) {
-  let pausedByUser = reduceMotion;
+  const pauseIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="5" width="3" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="3" height="14" rx="1" fill="currentColor"/></svg>';
+  const playIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
+  let pausedByUser = false;
 
   const show = (playing) => {
     hero.classList.toggle('is-paused', !playing);
@@ -38,9 +34,9 @@ if (hero && video && playBtn) {
   video.addEventListener('playing', () => show(true));
   video.addEventListener('pause', () => show(false));
 
-  // Start straight away (unless motion is reduced), and again whenever the tab comes back into view
-  show(!reduceMotion);
-  if (!reduceMotion) start();
+  // Start straight away, and again whenever the tab comes back into view
+  show(true);
+  start();
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden && !pausedByUser) start();
   });
@@ -51,24 +47,10 @@ document.querySelectorAll('.ticker').forEach((ticker) => {
   const track = ticker.querySelector('.ticker__track');
   const originals = [...track.children];
   const speed = 45; // pixels per second
-  let playing = !reduceMotion;
-
-  // Pause/play button, sat beside the section heading
-  const toggle = document.createElement('button');
-  toggle.type = 'button';
-  toggle.className = 'ticker__toggle';
-  const showToggle = () => {
-    toggle.innerHTML = playing ? pauseIcon : playIcon;
-    toggle.setAttribute('aria-label', playing ? 'Pause the tools list' : 'Play the tools list');
-  };
-  toggle.addEventListener('click', () => { playing = !playing; showToggle(); });
-  showToggle();
-  const heading = ticker.parentElement.querySelector('h2');
-  if (heading) heading.after(toggle);
-  else ticker.before(toggle);
   let setWidth = 1;
   let offset = 0;
   let dragging = false;
+  let hovering = false; // pauses while the mouse is over it
   let lastX = 0;
   let velocity = 0; // extra speed left over after a flick
   let last = performance.now();
@@ -93,7 +75,7 @@ document.querySelectorAll('.ticker').forEach((ticker) => {
     const dt = Math.min((now - last) / 1000, 0.05);
     last = now;
     if (!dragging) {
-      offset += ((playing ? speed : 0) + velocity) * dt;
+      offset += ((hovering ? 0 : speed) + velocity) * dt;
       velocity *= 0.94; // a flick slows down gently
     }
     offset = ((offset % setWidth) + setWidth) % setWidth;
@@ -101,6 +83,9 @@ document.querySelectorAll('.ticker').forEach((ticker) => {
     requestAnimationFrame(frame);
   };
 
+  // Mouse only, so a tap on a phone doesn't leave it stuck paused
+  ticker.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hovering = true; });
+  ticker.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') hovering = false; });
   ticker.addEventListener('pointerdown', (e) => {
     dragging = true;
     lastX = e.clientX;
@@ -154,9 +139,8 @@ document.querySelectorAll('.carousel').forEach((carousel) => {
     return first ? first.getBoundingClientRect().width + gap : track.clientWidth;
   };
 
-  const behavior = reduceMotion ? 'auto' : 'smooth';
-  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior }));
-  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior }));
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
 
   const refresh = () => {
     const max = track.scrollWidth - track.clientWidth - 2;
