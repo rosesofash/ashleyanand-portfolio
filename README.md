@@ -18,7 +18,7 @@ A plain HTML, CSS and JavaScript version of the Framer site. No build step and n
 | `a11yson.html` | A11yson case study |
 | `css/style.css` | All the styling. Colours and fonts are at the very top under `:root` |
 | `js/main.js` | Hero video play/pause, draggable tools ticker, carousels, back-to-top, phone nav |
-| `assets/` | Images (WebP), title SVGs, the hero video and your cursor. Tool logos are built into `index.html` |
+| `assets/` | Images (WebP), title SVGs, the hero video, your cursor and your resume (`Ashley-Anandakumar-Resume.pdf`; replace that file to update it everywhere). Tool logos are built into `index.html` |
 
 The phone layout kicks in below 810px wide, the same breakpoint Framer used.
 
