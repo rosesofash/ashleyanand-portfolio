@@ -213,6 +213,67 @@ if (pillNav) {
   onScroll();
 }
 
+// ---------- Home: hover the name in the intro to slide through Ashley, Ash and Anjena ----------
+const nameFlip = document.querySelector('.name-flip');
+
+if (nameFlip) {
+  const names = ['Ashley', 'Ash', 'Anjena'];
+  const box = document.createElement('span');
+  box.className = 'name-flip__box';
+  box.setAttribute('aria-hidden', 'true');   // screen readers just hear "Ashley"
+  const label = document.createElement('span');
+  label.className = 'sr-only';
+  label.textContent = names[0];
+
+  const makeWord = (text) => {
+    const word = document.createElement('span');
+    word.className = 'name-flip__word';
+    word.textContent = text;
+    return word;
+  };
+
+  let index = 0;
+  let current = makeWord(names[0]);
+  box.append(current);
+  nameFlip.textContent = '';
+  nameFlip.append(label, box);
+
+  let slide = 0;
+  const show = (next) => {
+    const thisSlide = ++slide;
+    index = next;
+    const old = current;
+    const from = box.offsetWidth;
+    current = makeWord(names[index]);
+    current.classList.add('is-below');
+    old.classList.add('is-above');          // the old name steps out of the flow and slides away
+    box.append(current);
+    const to = current.offsetWidth;
+    if (from && to) {                       // ease the width from the old name to the new one
+      box.style.width = from + 'px';
+      void box.offsetWidth;
+      box.style.width = to + 'px';
+    }
+    void current.offsetWidth;               // let the browser place it below before sliding it up
+    current.classList.remove('is-below');
+    setTimeout(() => {
+      old.remove();
+      if (thisSlide === slide) box.style.width = ''; // back to its natural width
+    }, 300);
+  };
+
+  let timer = null;
+  nameFlip.addEventListener('mouseenter', () => {
+    if (timer) return;
+    show((index + 1) % names.length);
+    timer = setInterval(() => show((index + 1) % names.length), 1100);
+  });
+  nameFlip.addEventListener('mouseleave', () => {
+    clearInterval(timer);                   // stop on whichever name is showing
+    timer = null;
+  });
+}
+
 // ---------- Keep the copyright year current ----------
 document.querySelectorAll('[data-year]').forEach((el) => {
   el.textContent = new Date().getFullYear();

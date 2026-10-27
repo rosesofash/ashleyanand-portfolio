@@ -240,6 +240,43 @@ p { margin: 0; }
   color: var(--purple);
   margin-bottom: 42px;
 }
+/* Name in the intro: hover it and it slides through Ashley, Ash and Anjena */
+.name-flip { position: relative; display: inline-block; vertical-align: bottom; }
+.name-flip::before {                /* steady hover area as wide as the longest name, so a shorter name can't slip out from under the cursor */
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -4px;
+  bottom: -8px;
+  width: max(100%, 3.2em);
+}
+.name-flip::after {                 /* small dotted underline, a hint that it does something */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;                     /* sits just under the j and y tails */
+  border-bottom: 2px dotted rgba(74, 45, 162, .55);
+}
+.name-flip__box {
+  position: relative;
+  display: block;
+  height: 29px;                     /* one line of the intro, plus room for the j and y tails */
+  margin-bottom: -5px;              /* ...without making the line any taller */
+  overflow: hidden;
+  white-space: nowrap;
+  transition: width .3s ease;       /* the sentence eases over as the name gets longer or shorter */
+}
+.name-flip__word { display: inline-block; transition: transform .3s ease; }
+.name-flip__word.is-below { transform: translateY(125%); transition: none; }   /* fully hidden below the box */
+.name-flip__word.is-above { position: absolute; top: 0; left: 0; transform: translateY(-100%); }
+/* Reduced motion (e.g. Windows animation effects off): a quick fade instead of a slide */
+@media (prefers-reduced-motion: reduce) {
+  .name-flip__box { transition: none; }
+  .name-flip__word { transition: opacity .25s ease; }
+  .name-flip__word.is-below,
+  .name-flip__word.is-above { transform: none; opacity: 0; }
+}
 @media (max-width: 809px) {
   .cover { padding: 10px 10px 40px; }
   .intro { display: none; }
