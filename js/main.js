@@ -263,8 +263,9 @@ if (nameFlip) {
   };
 
   let timer = null;
+  const canHover = window.matchMedia('(hover: hover)');
   nameFlip.addEventListener('mouseenter', () => {
-    if (timer) return;
+    if (timer || !canHover.matches) return;   // a tap on a phone shouldn't start it
     show((index + 1) % names.length);
     timer = setInterval(() => show((index + 1) % names.length), 1100);
   });

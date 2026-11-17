@@ -279,7 +279,11 @@ p { margin: 0; }
 }
 @media (max-width: 809px) {
   .cover { padding: 10px 10px 40px; }
-  .intro { display: none; }
+  .intro { margin: 6px 16px 26px; font-size: 17px; line-height: 24px; text-wrap: balance; }   /* two even lines, no lone word */
+}
+/* Phones and tablets can't hover, so the name stays Ashley: no underline hint */
+@media (hover: none) {
+  .name-flip::after, .name-flip::before { display: none; }
 }
 
 /* Project cards — thin border top/left, thick bottom/right, like the original */
@@ -611,6 +615,17 @@ a.project:hover {
   border-radius: 20px;
   background: var(--lavender);
 }
+.callout--plain { padding: 0; margin-bottom: 28px; background: none; align-items: start; }   /* text beside a carousel, no lavender box, both lined up at the top */
+.callout--text { grid-template-columns: 1fr; }      /* lavender box with text only */
+/* Desktop: the screens grow to the height of the text beside them, filled from the top-left where the labels are */
+@media (min-width: 810px) {
+  .callout.callout--plain { grid-template-columns: minmax(0, 1fr) 320px; align-items: stretch; }
+  .callout--plain .carousel,
+  .callout--plain .carousel__track { height: 100%; min-height: 180px; }
+  .callout.callout--plain .carousel__track img { height: 100%; object-fit: cover; object-position: left top; }
+}
+.callout > div > :first-child { margin-top: 0; }
+.callout > div > :last-child { margin-bottom: 0; }
 .callout .carousel { margin: 0; }
 .callout .carousel__track { padding: 0; }
 .callout .carousel__track > * { flex: 0 0 100%; }
